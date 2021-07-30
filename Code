@@ -1,0 +1,42 @@
+
+
+def f(n,l):
+    if n == 0:
+        return []
+    if n < 0:
+        return None
+    s = None
+    for i in l:
+        a = n - i
+        k = f(a,l)
+        if k != None:
+            l = [j for j in k]
+            l.append(i)
+            if s == None or  len(l) < len(s):
+                s = l
+    return s
+
+
+
+def mf(n,l,memo={}):
+    if n in memo:
+        return memo[n]
+    if n == 0:
+        return []
+    if n < 0:
+        return None
+    s = None
+    for i in l:
+        a = n - i
+        k = mf(a,l)
+        if k != None:
+            #memo[n] = k
+            l = [j for j in k]
+            l.append(i)
+            if s == None or  len(l) < len(s):
+                s = l
+                memo[n] = s
+    return s
+
+print(mf(140,[7,14]))
+print(f(140,[7,14]))
